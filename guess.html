@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>计算机大师的小游戏 · 猜数字</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica", "Arial", sans-serif;
+        background: linear-gradient(135deg, #ffd6e7, #ffeef8);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        background: white;
+        width: 350px;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        text-align: center;
+    }
+
+    h1 {
+        color: #ff4f9a;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    h2 {
+        color: #ff8aba;
+        font-size: 18px;
+        margin-top: -10px;
+        margin-bottom: 25px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0 20px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 18px;
+        width: 150px;
+        border-radius: 12px;
+        border: 2px solid #ff9ac2;
+        outline: none;
+        text-align: center;
+    }
+
+    input:focus {
+        border-color: #ff4f9a;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #ff6fb0;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    button:hover {
+        background-color: #ff4f9a;
+    }
+
+    #msg {
+        font-size: 18px;
+        color: #ff4f9a;
+        margin-top: 20px;
+        min-height: 30px;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h1>计算机大师的小游戏 ✨</h1>
+    <h2>猜数字挑战 🎮</h2>
+
+    <p>我已经想好了一个 1 - 100 的数字，快来猜猜看吧！</p>
+
+    <input id="guessInput" type="number" placeholder="输入你的数字">
+    <br>
+    <button onclick="checkGuess()">提交猜测</button>
+
+    <div id="msg"></div>
+
+    <button onclick="restart()">再玩一次</button>
+</div>
+
+<script>
+    let answer = Math.floor(Math.random() * 100) + 1;
+    let count = 0;
+
+    function checkGuess() {
+        let guess = Number(document.getElementById("guessInput").value);
+        let msg = document.getElementById("msg");
+        count++;
+
+        if (!guess) {
+            msg.innerText = "请输入一个数字呀～";
+            return;
+        }
+
+        if (guess > answer) {
+            msg.innerText = "太大了喵～";
+        } else if (guess < answer) {
+            msg.innerText = "太小了喵～";
+        } else {
+            msg.innerHTML = `🎉 猜对啦！你总共猜了 <b>${count}</b> 次！`;
+        }
+    }
+
+    function restart() {
+        answer = Math.floor(Math.random() * 100) + 1;
+        count = 0;
+        document.getElementById("msg").innerText = "";
+        document.getElementById("guessInput").value = "";
+    }
+</script>
+
+</body>
+</html>
